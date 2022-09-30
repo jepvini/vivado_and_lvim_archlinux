@@ -86,6 +86,8 @@ pip3 install hdl-checker --upgrade
 Add to your lvim config 
 
 ```
+lua << EOF
+-- Only define once
 if not require'lspconfig.configs'.hdl_checker then
   require'lspconfig.configs'.hdl_checker = {
     default_config = {
@@ -101,6 +103,8 @@ if not require'lspconfig.configs'.hdl_checker then
     };
   }
 end
+
+require'lspconfig'.hdl_checker.setup{}
 ```
 
 done
@@ -127,6 +131,11 @@ sudo cp ~/Downloads/vhdl.vim /usr/share/vim/vim90/indent/
 
 done
 
+## 4-Snipets
+
+Copy the snippets folder to your .config/lvim folder
+
+done
 
 
 
