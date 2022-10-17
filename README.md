@@ -34,14 +34,14 @@ done
 
 ## 2-LunarVim
 
-There are 2 lsp server that I've tried
+Lsp server
 
 ### ghdl-ls
 
 Install ghdl from source (using pacman didn't work for me)
 
 ```
-gcc-ada # required for compiling
+pacman -S gcc-ada # required for compiling
 git clone https://github.com/ghdl/ghdl.git
 cd ghdl/
 ./configure --prefix=/usr/local
@@ -73,38 +73,6 @@ sys.platform: linux, os.name: posix
 Finally add to your lvim config.lua
 ```
 require'lspconfig'.ghdl_ls.setup{}
-```
-
-done
-
-### hdl_checker
-
-Install it
-```
-pip3 install hdl-checker --upgrade
-```
-Add to your lvim config 
-
-```
-lua << EOF
--- Only define once
-if not require'lspconfig.configs'.hdl_checker then
-  require'lspconfig.configs'.hdl_checker = {
-    default_config = {
-    cmd = {"hdl_checker", "--lsp", };
-    filetypes = {"vhdl", "verilog", "systemverilog"};
-      root_dir = function(fname)
-        -- will look for the .hdl_checker.config file in parent directory, a
-        -- .git directory, or else use the current directory, in that order.
-        local util = require'lspconfig'.util
-        return util.root_pattern('.hdl_checker.config')(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
-      end;
-      settings = {};
-    };
-  }
-end
-
-require'lspconfig'.hdl_checker.setup{}
 ```
 
 done
